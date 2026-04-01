@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kraken × Alkimi - Campaign Proposal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0D14;
+      --sidebar: #13131C;
+      --card: #1A1A27;
+      --card-hover: #1F1F30;
+      --border: #252535;
+      --border-light: #2E2E44;
+      --purple: #5741D9;
+      --purple-light: #7B5EF8;
+      --purple-glow: rgba(87,65,217,0.3);
+      --green: #00C896;
+      --blue: #4B9EFF;
+      --text: #FFFFFF;
+      --text-muted: #8A8AA0;
+      --text-dim: #4A4A60;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 240px;
+      min-width: 240px;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 18px 0;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 0 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .logo-text { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; line-height: 1.2; }
+    .logo-sub  { font-size: 10px; color: var(--text-muted); }
+
+    .nav-group { padding: 0 10px; margin-bottom: 6px; }
+    .nav-label {
+      font-size: 9.5px; font-weight: 600; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 1px;
+      padding: 6px 8px 4px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 9px;
+      padding: 8px 10px; border-radius: 7px;
+      cursor: pointer; color: var(--text-muted);
+      font-size: 13px; font-weight: 500;
+      transition: all 0.13s;
+      user-select: none;
+    }
+    .nav-item:hover { background: var(--card); color: var(--text); }
+    .nav-item.active { background: rgba(87,65,217,0.18); color: #A48EFF; }
+    .nav-icon { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .sidebar-footer {
+      padding: 14px 18px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .contact-name  { font-size: 12.5px; font-weight: 600; }
+    .contact-role  { font-size: 10.5px; color: var(--text-muted); margin-top: 2px; }
+    .contact-email { font-size: 10.5px; color: var(--purple-light); margin-top: 4px; }
+
+    /* ── MAIN ── */
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+
+    .topbar {
+      height: 52px; min-height: 52px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 22px; gap: 10px;
+    }
+    .asset-name { font-size: 17px; font-weight: 700; }
+    .pill {
+      font-size: 11px; padding: 3px 9px; border-radius: 20px;
+      background: var(--card); border: 1px solid var(--border-light);
+      color: var(--text-muted);
+    }
+    .pill.accent { background: rgba(87,65,217,0.15); border-color: rgba(87,65,217,0.3); color: #A48EFF; }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .deck-btn {
+      font-size: 12px; padding: 6px 14px; border-radius: 7px;
+      background: var(--card); border: 1px solid var(--border-light);
+      color: var(--text); cursor: pointer; text-decoration: none;
+      transition: background 0.13s;
+    }
+    .deck-btn:hover { background: var(--card-hover); }
+
+    .content-area { flex: 1; overflow: hidden; }
+
+    /* ── CENTER (full width now) ── */
+    .center { height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+
+    /* ── OVERVIEW (always visible top section) ── */
+    /* ── HERO OVERVIEW ── */
+    .overview-section {
+      padding: 22px 28px 20px;
+      flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-card {
+      background: linear-gradient(135deg, rgba(87,65,217,0.12) 0%, rgba(87,65,217,0.04) 60%, transparent 100%);
+      border: 1px solid rgba(87,65,217,0.22);
+      border-radius: 14px;
+      padding: 24px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(87,65,217,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 10px; font-weight: 700; color: #A48EFF;
+      text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px;
+    }
+    .hero-title {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+      margin-bottom: 12px; line-height: 1.2;
+    }
+    .hero-blurb {
+      font-size: 13px; color: var(--text-muted); line-height: 1.7;
+      max-width: 720px; margin-bottom: 18px;
+    }
+    .hero-pills {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .hero-pill {
+      font-size: 11.5px; font-weight: 600; padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text-muted);
+    }
+
+    /* Budget display */
+    .budget-amount {
+      font-size: 38px; font-weight: 700; letter-spacing: -1.5px;
+      font-variant-numeric: tabular-nums;
+    }
+    .budget-sub {
+      font-size: 13px; color: var(--green); margin-top: 5px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .up-arrow {
+      display: inline-block; width: 0; height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 8px solid var(--green);
+    }
+
+    /* ── CHART ── */
+    .chart-wrap {
+      position: relative; height: 200px;
+      margin: 14px 0 0;
+      border-bottom: 1px solid var(--border);
+    }
+    #chartCanvas { width: 100%; height: 100%; display: block; }
+    .chart-tooltip {
+      position: absolute;
+      background: var(--card);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 8px 12px;
+      pointer-events: none;
+      display: none;
+      font-size: 12px;
+      line-height: 1.6;
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    /* ── BUDGET TIERS ── */
+    .tier-row {
+      display: flex; align-items: center; gap: 3px;
+      padding: 10px 0 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tier-btn {
+      padding: 5px 13px; border-radius: 6px;
+      font-size: 12.5px; font-weight: 500;
+      border: none; background: transparent;
+      color: var(--text-muted); cursor: pointer;
+      transition: all 0.13s;
+    }
+    .tier-btn:hover { background: var(--card); color: var(--text); }
+    .tier-btn.active { background: var(--card); color: var(--text); font-weight: 600; }
+    .slider-wrap { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .slider-lbl { font-size: 11px; color: var(--text-muted); }
+    input[type=range] {
+      width: 150px; appearance: none; height: 3px;
+      border-radius: 2px; background: var(--border-light); outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      appearance: none; width: 14px; height: 14px; border-radius: 50%;
+      background: var(--purple-light); cursor: pointer;
+      box-shadow: 0 0 10px var(--purple-glow);
+    }
+
+    /* ── GEO GRID ── */
+    .section-label {
+      font-size: 11px; font-weight: 600; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px;
+    }
+    .geo-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px; margin-bottom: 0;
+    }
+    .geo-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 10px;
+      cursor: pointer; transition: all 0.13s;
+      border-top-width: 3px;
+    }
+    .geo-card:hover { background: var(--card-hover); }
+    .geo-flag { font-size: 18px; display: block; margin-bottom: 6px; }
+    .geo-name { font-size: 12px; font-weight: 700; }
+    .geo-budget { font-size: 10.5px; color: var(--text-muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+    .geo-imps  { font-size: 10.5px; margin-top: 3px; font-variant-numeric: tabular-nums; font-weight: 600; }
+
+    /* ── DYNAMIC PANEL AREA ── */
+    .panel-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 28px 28px;
+      min-height: 0;
+    }
+
+    .panel-section-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 18px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .panel-section-title {
+      font-size: 12px; font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.8px;
+    }
+
+    .panel-content { display: none; }
+    .panel-content.active { display: block; }
+
+    /* ── TABLE ── */
+    .campaign-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 32px; }
+    .campaign-table th {
+      text-align: left; padding: 8px 12px;
+      color: var(--text-muted); font-weight: 500;
+      font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .campaign-table td {
+      padding: 9px 12px; border-bottom: 1px solid var(--border);
+      font-variant-numeric: tabular-nums;
+    }
+    .campaign-table tbody tr:hover td { background: var(--card); }
+    .tag {
+      font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 600;
+    }
+    .tag-ctv    { background: rgba(75,158,255,0.15);  color: #4B9EFF; }
+    .tag-tradfi { background: rgba(0,200,150,0.15);   color: #00C896; }
+    .tag-studio { background: rgba(251,191,36,0.15);  color: #FBBF24; }
+    .tag-video  { background: rgba(99,179,237,0.15);  color: #63B3ED; }
+
+    /* Geo header row in new table */
+    .geo-header-row td {
+      background: rgba(255,255,255,0.04);
+      font-size: 12px; font-weight: 700;
+      padding: 8px 12px !important;
+      color: var(--text);
+      border-bottom: 1px solid var(--border) !important;
+    }
+    .geo-dot {
+      display: inline-block; width: 8px; height: 8px;
+      border-radius: 50%; margin-right: 6px; vertical-align: middle;
+    }
+
+    /* Stat cards grid */
+    .stat-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .stat-card-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 22px;
+    }
+    .stat-card-number {
+      font-size: 28px; font-weight: 800;
+      color: var(--green); letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .stat-card-label {
+      font-size: 10px; font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.8px;
+      line-height: 1.5;
+    }
+    .plan-footnote {
+      font-size: 11px; color: var(--text-dim);
+      font-style: italic; margin-top: 10px; margin-bottom: 20px;
+    }
+
+    /* ── FILTERS ── */
+    .filter-bar {
+      display: flex; flex-direction: column; gap: 8px;
+      margin-bottom: 14px;
+    }
+    .filter-row {
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    }
+    .filter-lbl {
+      font-size: 10px; font-weight: 700; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.8px;
+      min-width: 46px;
+    }
+    .fchip {
+      padding: 3px 11px; border-radius: 20px;
+      font-size: 11.5px; font-weight: 500;
+      border: 1px solid var(--border-light);
+      background: transparent; color: var(--text-muted);
+      cursor: pointer; transition: all 0.13s; font-family: inherit;
+    }
+    .fchip:hover { background: var(--card); color: var(--text); }
+    .site-chip {
+      background: var(--card); border: 1px solid var(--border-light);
+      border-radius: 4px; padding: 3px 7px;
+      font-size: 10.5px; color: var(--text-muted);
+    }
+    .fchip.active { color: #fff; border-color: transparent; }
+
+    /* ── SUMMARY PANEL LAYOUT ── */
+    .summary-stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px; margin-bottom: 22px;
+    }
+    .summary-stat-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px;
+    }
+    .summary-stat-label {
+      font-size: 10px; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px;
+    }
+    .summary-stat-value { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .summary-stat-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .breakdown-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px;
+    }
+    .breakdown-card-label {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between;
+      font-size: 12px; margin-bottom: 7px;
+    }
+    .breakdown-row-lbl { color: var(--text-muted); }
+    .breakdown-row-val { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+    /* ── DETAILS PANEL ── */
+    .details-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .details-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px;
+    }
+    .details-card-title {
+      font-size: 10px; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 14px;
+    }
+    .panel-row {
+      display: flex; justify-content: space-between;
+      font-size: 12.5px; margin-bottom: 9px;
+    }
+    .panel-row-lbl { color: var(--text-muted); }
+    .panel-row-val { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+    /* ── FORMATS PANEL ── */
+    .formats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .format-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px;
+    }
+    .format-card-tag { margin-bottom: 12px; }
+    .format-card-desc {
+      font-size: 12.5px; color: var(--text-muted); line-height: 1.65;
+    }
+
+    /* ── SITES PANEL ── */
+    .sites-category { margin-bottom: 22px; }
+    .sites-category-title {
+      font-size: 11px; font-weight: 700; color: var(--text);
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;
+    }
+    .sites-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    /* ── ADDED VALUE PANEL ── */
+    .av-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .av-stat-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px;
+    }
+    .av-box {
+      background: rgba(87,65,217,0.1);
+      border: 1px solid rgba(87,65,217,0.22);
+      border-radius: 12px; padding: 18px;
+    }
+    .av-title {
+      font-size: 10px; font-weight: 700; color: #A48EFF;
+      text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 12px;
+    }
+    .av-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 12px; color: var(--text-muted); padding: 5px 0;
+    }
+    .av-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--purple-light); margin-top: 5px; flex-shrink: 0;
+    }
+    .av-stat-label {
+      font-size: 10px; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px;
+    }
+    .av-stat-value { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .av-stat-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    hr.pdiv { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo" style="flex-direction:column; align-items:flex-start; gap:8px;">
+    <!-- Logos row: Kraken + Omnicom -->
+    <div style="display:flex; align-items:center; gap:10px;">
+    <svg width="90" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg" aria-label="Kraken logo" style="display:block;">
+      <path fill="#5841D9" fill-rule="evenodd" d="
+  M 195.0 276.0 L 178.0 307.0 L 168.0 331.0 L 161.0 352.0 L 154.0 382.0 L 152.0 401.0 L 151.0 402.0 L 151.0 412.0 L 150.0 413.0 L 150.0 436.0 L 149.0 437.0 L 150.0 438.0 L 150.0 576.0 L 156.0 591.0 L 169.0 604.0 L 184.0 610.0 L 201.0 610.0 L 214.0 605.0 L 222.0 599.0 L 228.0 592.0 L 232.0 585.0 L 235.0 575.0 L 235.0 434.0 L 236.0 433.0 L 236.0 428.0 L 240.0 417.0 L 244.0 411.0 L 253.0 402.0 L 262.0 397.0 L 273.0 394.0 L 284.0 394.0 L 292.0 396.0 L 300.0 400.0 L 313.0 412.0 L 318.0 421.0 L 321.0 432.0 L 321.0 574.0 L 323.0 582.0 L 329.0 593.0 L 339.0 603.0 L 346.0 607.0 L 356.0 610.0 L 372.0 610.0 L 379.0 608.0 L 391.0 601.0 L 398.0 594.0 L 404.0 583.0 L 407.0 570.0 L 407.0 429.0 L 412.0 416.0 L 416.0 410.0 L 423.0 403.0 L 433.0 397.0 L 444.0 394.0 L 455.0 394.0 L 470.0 399.0 L 483.0 410.0 L 491.0 425.0 L 492.0 429.0 L 492.0 570.0 L 493.0 571.0 L 493.0 577.0 L 499.0 591.0 L 512.0 604.0 L 527.0 610.0 L 543.0 610.0 L 553.0 607.0 L 560.0 603.0 L 570.0 593.0 L 576.0 582.0 L 578.0 574.0 L 578.0 432.0 L 579.0 427.0 L 586.0 412.0 L 596.0 402.0 L 607.0 396.0 L 615.0 394.0 L 631.0 395.0 L 646.0 402.0 L 656.0 412.0 L 663.0 427.0 L 663.0 432.0 L 664.0 433.0 L 664.0 575.0 L 668.0 587.0 L 671.0 592.0 L 677.0 599.0 L 689.0 607.0 L 698.0 610.0 L 715.0 610.0 L 730.0 604.0 L 743.0 591.0 L 749.0 576.0 L 749.0 413.0 L 748.0 412.0 L 748.0 402.0 L 747.0 401.0 L 747.0 395.0 L 746.0 394.0 L 746.0 388.0 L 743.0 372.0 L 731.0 331.0 L 720.0 305.0 L 710.0 286.0 L 694.0 261.0 L 676.0 238.0 L 655.0 216.0 L 639.0 202.0 L 622.0 189.0 L 597.0 173.0 L 567.0 158.0 L 537.0 147.0 L 514.0 141.0 L 493.0 138.0 L 492.0 137.0 L 485.0 137.0 L 484.0 136.0 L 454.0 135.0 L 453.0 134.0 L 425.0 135.0 L 424.0 136.0 L 415.0 136.0 L 414.0 137.0 L 395.0 139.0 L 369.0 145.0 L 342.0 154.0 L 311.0 168.0 L 284.0 184.0 L 266.0 197.0 L 245.0 215.0 L 231.0 229.0 L 210.0 254.0 Z
+  M 150.0 645.0 L 150.0 760.0 L 168.0 760.0 L 168.0 718.0 L 183.0 703.0 L 184.0 703.0 L 188.0 708.0 L 189.0 711.0 L 193.0 716.0 L 197.0 724.0 L 201.0 729.0 L 202.0 732.0 L 206.0 737.0 L 210.0 745.0 L 220.0 760.0 L 245.0 760.0 L 221.0 724.0 L 220.0 721.0 L 210.0 707.0 L 209.0 704.0 L 199.0 690.0 L 199.0 688.0 L 222.0 665.0 L 223.0 665.0 L 242.0 646.0 L 242.0 645.0 L 218.0 645.0 L 169.0 693.0 L 168.0 692.0 L 168.0 645.0 Z
+  M 311.0 643.0 L 299.0 643.0 L 289.0 647.0 L 280.0 655.0 L 274.0 663.0 L 273.0 662.0 L 273.0 645.0 L 255.0 645.0 L 255.0 760.0 L 274.0 760.0 L 274.0 692.0 L 275.0 691.0 L 275.0 686.0 L 279.0 677.0 L 287.0 668.0 L 293.0 665.0 L 300.0 664.0 L 301.0 663.0 L 308.0 663.0 L 309.0 664.0 L 311.0 664.0 Z
+  M 334.0 652.0 L 328.0 658.0 L 324.0 666.0 L 323.0 674.0 L 322.0 675.0 L 322.0 681.0 L 340.0 681.0 L 342.0 672.0 L 344.0 668.0 L 348.0 664.0 L 356.0 660.0 L 361.0 660.0 L 362.0 659.0 L 372.0 659.0 L 373.0 660.0 L 378.0 660.0 L 379.0 661.0 L 381.0 661.0 L 387.0 664.0 L 391.0 668.0 L 393.0 673.0 L 393.0 684.0 L 388.0 690.0 L 386.0 690.0 L 385.0 691.0 L 380.0 691.0 L 379.0 692.0 L 372.0 692.0 L 371.0 693.0 L 364.0 693.0 L 363.0 694.0 L 356.0 694.0 L 355.0 695.0 L 344.0 696.0 L 343.0 697.0 L 338.0 698.0 L 329.0 703.0 L 321.0 711.0 L 318.0 717.0 L 317.0 724.0 L 316.0 725.0 L 316.0 736.0 L 317.0 737.0 L 317.0 741.0 L 319.0 744.0 L 319.0 746.0 L 323.0 752.0 L 328.0 757.0 L 334.0 761.0 L 336.0 761.0 L 339.0 763.0 L 342.0 763.0 L 343.0 764.0 L 350.0 764.0 L 351.0 765.0 L 354.0 765.0 L 355.0 764.0 L 363.0 764.0 L 364.0 763.0 L 367.0 763.0 L 368.0 762.0 L 373.0 761.0 L 387.0 753.0 L 393.0 747.0 L 398.0 758.0 L 400.0 760.0 L 406.0 763.0 L 420.0 763.0 L 421.0 762.0 L 424.0 762.0 L 425.0 761.0 L 425.0 747.0 L 418.0 748.0 L 417.0 747.0 L 415.0 747.0 L 412.0 743.0 L 412.0 668.0 L 408.0 658.0 L 401.0 651.0 L 393.0 647.0 L 391.0 647.0 L 387.0 645.0 L 384.0 645.0 L 383.0 644.0 L 378.0 644.0 L 377.0 643.0 L 358.0 643.0 L 357.0 644.0 L 352.0 644.0 L 351.0 645.0 L 343.0 647.0 Z
+  M 393.0 704.0 L 393.0 722.0 L 392.0 723.0 L 392.0 726.0 L 389.0 733.0 L 381.0 741.0 L 376.0 744.0 L 374.0 744.0 L 368.0 747.0 L 364.0 747.0 L 363.0 748.0 L 352.0 748.0 L 343.0 744.0 L 339.0 740.0 L 336.0 733.0 L 336.0 727.0 L 337.0 726.0 L 338.0 721.0 L 342.0 716.0 L 349.0 712.0 L 355.0 711.0 L 356.0 710.0 L 377.0 708.0 L 378.0 707.0 L 388.0 705.0 L 391.0 703.0 Z
+  M 438.0 645.0 L 438.0 760.0 L 456.0 760.0 L 456.0 718.0 L 471.0 703.0 L 472.0 703.0 L 476.0 708.0 L 477.0 711.0 L 481.0 716.0 L 485.0 724.0 L 489.0 729.0 L 490.0 732.0 L 494.0 737.0 L 498.0 745.0 L 508.0 760.0 L 533.0 760.0 L 487.0 689.0 L 487.0 688.0 L 510.0 665.0 L 511.0 665.0 L 530.0 646.0 L 530.0 645.0 L 506.0 645.0 L 457.0 693.0 L 456.0 692.0 L 456.0 645.0 Z
+  M 580.0 643.0 L 579.0 644.0 L 575.0 644.0 L 574.0 645.0 L 568.0 646.0 L 556.0 653.0 L 547.0 662.0 L 543.0 668.0 L 539.0 676.0 L 539.0 678.0 L 536.0 685.0 L 535.0 697.0 L 534.0 698.0 L 534.0 713.0 L 535.0 714.0 L 535.0 720.0 L 536.0 721.0 L 536.0 725.0 L 537.0 726.0 L 538.0 732.0 L 543.0 742.0 L 555.0 755.0 L 561.0 758.0 L 563.0 760.0 L 565.0 760.0 L 568.0 762.0 L 574.0 763.0 L 575.0 764.0 L 584.0 764.0 L 585.0 765.0 L 587.0 764.0 L 597.0 764.0 L 598.0 763.0 L 602.0 763.0 L 603.0 762.0 L 608.0 761.0 L 619.0 755.0 L 630.0 743.0 L 636.0 731.0 L 637.0 724.0 L 618.0 724.0 L 614.0 734.0 L 611.0 738.0 L 602.0 745.0 L 600.0 745.0 L 596.0 747.0 L 593.0 747.0 L 592.0 748.0 L 582.0 748.0 L 581.0 747.0 L 577.0 747.0 L 570.0 744.0 L 562.0 736.0 L 557.0 725.0 L 556.0 717.0 L 555.0 716.0 L 555.0 710.0 L 556.0 709.0 L 639.0 709.0 L 638.0 687.0 L 637.0 686.0 L 637.0 682.0 L 636.0 681.0 L 635.0 674.0 L 630.0 664.0 L 620.0 653.0 L 607.0 646.0 L 605.0 646.0 L 601.0 644.0 L 597.0 644.0 L 596.0 643.0 Z
+  M 555.0 692.0 L 556.0 691.0 L 557.0 682.0 L 561.0 674.0 L 567.0 667.0 L 577.0 661.0 L 580.0 661.0 L 581.0 660.0 L 594.0 660.0 L 595.0 661.0 L 598.0 661.0 L 603.0 663.0 L 611.0 670.0 L 616.0 679.0 L 619.0 693.0 L 618.0 694.0 L 556.0 694.0 Z
+  M 736.0 649.0 L 731.0 646.0 L 729.0 646.0 L 725.0 644.0 L 721.0 644.0 L 720.0 643.0 L 704.0 643.0 L 703.0 644.0 L 699.0 644.0 L 689.0 648.0 L 683.0 652.0 L 675.0 660.0 L 674.0 659.0 L 674.0 645.0 L 656.0 645.0 L 656.0 760.0 L 675.0 760.0 L 675.0 690.0 L 676.0 689.0 L 676.0 683.0 L 681.0 673.0 L 688.0 666.0 L 695.0 662.0 L 697.0 662.0 L 698.0 661.0 L 703.0 661.0 L 704.0 660.0 L 711.0 660.0 L 712.0 661.0 L 715.0 661.0 L 720.0 663.0 L 727.0 671.0 L 727.0 673.0 L 729.0 677.0 L 729.0 681.0 L 730.0 682.0 L 730.0 760.0 L 749.0 760.0 L 749.0 673.0 L 748.0 672.0 L 747.0 664.0 L 743.0 656.0 Z
+      "/>
+    </svg>
+    <!-- Divider -->
+    <div style="width:1px; height:28px; background:var(--border-light); flex-shrink:0;"></div>
+    <!-- Omnicom wordmark -->
+    <svg width="72" height="18" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" aria-label="Omnicom logo" style="display:block; opacity:0.75;">
+      <text x="0" y="38" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="700" fill="#ffffff" letter-spacing="-0.5">omnicom</text>
+    </svg>
+    </div>
+    <div class="logo-sub" style="padding-left:2px; font-size:10px; color:#4A4A60;">× Alkimi Proposal</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label">Campaign</div>
+    <div class="nav-item" data-panel="overview" onclick="showPanel('overview', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+        <rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor"/>
+        <rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.45"/>
+        <rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.45"/>
+        <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.45"/>
+      </svg>
+      Overview
+    </div>
+    <div class="nav-item active" data-panel="lineitems" onclick="showPanel('lineitems', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+        <rect x="1" y="4" width="14" height="1.5" rx="0.75" fill="currentColor"/>
+        <rect x="1" y="7.5" width="10" height="1.5" rx="0.75" fill="currentColor" opacity="0.55"/>
+        <rect x="1" y="11" width="12" height="1.5" rx="0.75" fill="currentColor" opacity="0.35"/>
+      </svg>
+      Media Plan
+    </div>
+    <div class="nav-item" data-panel="summary" onclick="showPanel('summary', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+        <path d="M2 12L5 8L8 10L12 5L14 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="1" y="13" width="14" height="1" rx="0.5" fill="currentColor" opacity="0.3"/>
+      </svg>
+      Summary
+    </div>
+    <div class="nav-item" data-panel="formats" onclick="showPanel('formats', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+        <rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.4" fill="none"/>
+        <path d="M6.5 6L10 8L6.5 10V6Z" fill="currentColor"/>
+      </svg>
+      Formats
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label">Resources</div>
+    <a class="nav-item" href="https://docs.google.com/presentation/d/1XVyrH8oV5NWH2APyI3sSzM5tvKSGryDItvwouk5R7m4/edit" target="_blank"
+       style="color:#A48EFF; background:rgba(87,65,217,0.1); text-decoration:none;">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+        <path d="M3 3h4v1.5H4.5v7h7V10H13v4H3z" fill="currentColor" opacity="0.5"/>
+        <path d="M9 3h4v4h-1.5V5.56L7.28 9.78l-1.06-1.06L10.44 4.5H9z" fill="currentColor"/>
+      </svg>
+      View Alkimi Deck ↗
+    </a>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="contact-name">Lauren Lafferty</div>
+    <div class="contact-role">Global Head of Sales, Crypto</div>
+    <div class="contact-email">lauren@alkimi.org</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <span class="asset-name">Proactive Proposal</span>
+    <span class="pill">TradFi/Consumer</span>
+    <span class="pill">7 Markets</span>
+    <div class="topbar-right">
+      <svg height="28" viewBox="0 0 1581 351" xmlns="http://www.w3.org/2000/svg" aria-label="Alkimi logo" style="display:block;">
+        <defs>
+          <linearGradient id="alki-fadeLeft" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#000" stop-opacity="0"/>
+            <stop offset="1" stop-color="#fff" stop-opacity="0.12"/>
+          </linearGradient>
+          <linearGradient id="alki-fadeRight" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#fff" stop-opacity="0.08"/>
+            <stop offset="1" stop-color="#fff" stop-opacity="0.95"/>
+          </linearGradient>
+          <filter id="alki-grain" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="4" result="noise"/>
+            <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+            <feComponentTransfer in="mono" result="leveled">
+              <feFuncR type="gamma" amplitude="1.3" exponent="2.6" offset="0"/>
+              <feFuncG type="gamma" amplitude="1.3" exponent="2.6" offset="0"/>
+              <feFuncB type="gamma" amplitude="1.3" exponent="2.6" offset="0"/>
+            </feComponentTransfer>
+            <feComposite in="leveled" in2="SourceGraphic" operator="in"/>
+          </filter>
+          <clipPath id="alki-leftWedge">
+            <path d="M1236 64 L1402 64 L1366 150 L1318 235 L1298 316 L1236 316 Z"/>
+          </clipPath>
+          <clipPath id="alki-rightWedge">
+            <path d="M1426 64 L1552 64 L1552 316 L1518 316 L1498 226 L1466 150 Z"/>
+          </clipPath>
+        </defs>
+        <text x="80" y="265" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-size="220" font-weight="800" fill="#ffffff" text-anchor="start" letter-spacing="-2">alkimi</text>
+        <rect x="1233" y="64" width="321" height="1.5" fill="#fff" opacity="0.09"/>
+        <g clip-path="url(#alki-leftWedge)">
+          <rect x="1236" y="64" width="166" height="252" fill="url(#alki-fadeLeft)" filter="url(#alki-grain)" opacity="0.55"/>
+        </g>
+        <g clip-path="url(#alki-rightWedge)">
+          <rect x="1426" y="64" width="126" height="252" fill="url(#alki-fadeRight)" filter="url(#alki-grain)" opacity="0.96"/>
+        </g>
+        <path d="M1361 64 L1468 64 C1462 88 1458 104 1458 122 C1458 145 1473 180 1494 220 C1512 255 1528 286 1532 306 C1534 319 1525 328 1508 332 C1493 336 1471 337 1443 337 L1374 337 C1346 337 1324 336 1309 332 C1292 328 1283 319 1285 306 C1289 286 1305 255 1323 220 C1344 180 1359 145 1359 122 C1359 104 1355 88 1349 64 Z" fill="#13131C"/>
+        <path d="M1361 64 L1468 64 C1462 88 1458 104 1458 122 C1458 145 1473 180 1494 220 C1512 255 1528 286 1532 306 C1534 319 1525 328 1508 332 C1493 336 1471 337 1443 337 L1374 337 C1346 337 1324 336 1309 332 C1292 328 1283 319 1285 306 C1289 286 1305 255 1323 220 C1344 180 1359 145 1359 122 C1359 104 1355 88 1349 64" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.2"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="content-area">
+    <div class="center">
+
+      <!-- ── OVERVIEW SECTION (always visible) ── -->
+      <div class="overview-section">
+        <div class="hero-card">
+          <div class="hero-eyebrow">Campaign Brief</div>
+          <h1 class="hero-title">Kraken × Alkimi</h1>
+          <p class="hero-blurb">
+            Kraken is shifting its focus from the crypto-native audience of Pro, to mainstream consumers and traditional finance investors across priority markets. Alkimi's recommendation focuses on high impact formats including non-skippable CTV, 100% Share of Screen, and custom Alkimi Studio units across 7 priority markets, US, CA, DE, FR, IT, AU, and BR, to reach that audience at scale.
+          </p>
+          <div class="hero-pills">
+            <span class="hero-pill">7 Markets</span>
+            <span class="hero-pill">CTV</span>
+            <span class="hero-pill">TradFi/Consumer Takeover</span>
+            <span class="hero-pill">Alkimi Studio</span>
+            <span class="hero-pill">95% Viewability</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PERSISTENT STAT CARDS ── -->
+      <div class="stat-cards-grid" id="overviewStats" style="padding: 16px 28px; flex-shrink:0;">
+        <div class="stat-card-item">
+          <div class="stat-card-number">+25%</div>
+          <div class="stat-card-label">Quality Audience Reached VS TTD</div>
+        </div>
+        <div class="stat-card-item">
+          <div class="stat-card-number">+42%</div>
+          <div class="stat-card-label">Website Visitor Uplift When Including CTV Alongside Social</div>
+        </div>
+        <div class="stat-card-item">
+          <div class="stat-card-number">100%</div>
+          <div class="stat-card-label">Full Funnel Transparency</div>
+        </div>
+        <div class="stat-card-item">
+          <div class="stat-card-number">+25%</div>
+          <div class="stat-card-label">Brand Uplift &amp; Intent to Try a New Crypto Platform</div>
+        </div>
+      </div>
+
+      <!-- ── DYNAMIC PANEL AREA ── -->
+      <div class="panel-area" id="panelArea">
+
+        <!-- Panel header -->
+        <div class="panel-section-header" id="panelHeader" style="display:none;">
+          <span class="panel-section-title" id="panelTitle"></span>
+        </div>
+
+        <!-- PANEL: LINE ITEMS / MEDIA PLAN -->
+        <div class="panel-content" id="panel-lineitems">
+
+          <!-- Budget display -->
+          <div style="margin-bottom:4px;">
+            <div class="budget-amount" id="budgetDisplay">$250,000</div>
+            <div class="budget-sub">
+              <span class="up-arrow"></span>
+              <span id="impDisplay">~7.6M impressions · 95% viewability · +10% added value</span>
+            </div>
+          </div>
+
+          <!-- Tier buttons + slider -->
+          <div class="tier-row">
+            <button class="tier-btn" data-v="100000"  onclick="setBudget(100000)">$100K</button>
+            <button class="tier-btn" data-v="250000"  onclick="setBudget(250000)">$250K</button>
+            <button class="tier-btn" data-v="500000"  onclick="setBudget(500000)">$500K</button>
+            <button class="tier-btn" data-v="750000"  onclick="setBudget(750000)">$750K</button>
+            <button class="tier-btn" data-v="1000000" onclick="setBudget(1000000)">$1M</button>
+            <div class="slider-wrap">
+              <span class="slider-lbl">Custom</span>
+              <input type="range" id="budgetSlider" min="100000" max="1000000" step="10000" value="250000" oninput="onSlider(+this.value)">
+            </div>
+          </div>
+
+          <!-- Market allocation -->
+          <div style="margin-bottom:20px;">
+            <div class="section-label">Market Allocation</div>
+            <div class="geo-grid" id="geoGrid"></div>
+          </div>
+
+          <hr class="pdiv" style="margin-bottom:16px;">
+
+          <!-- Markets (display only) -->
+          <div class="filter-bar" style="margin-bottom:18px;">
+            <div class="filter-row">
+              <span class="filter-lbl">Markets</span>
+              <span class="fchip" style="cursor:default;">US</span>
+              <span class="fchip" style="cursor:default;">DE</span>
+              <span class="fchip" style="cursor:default;">FR</span>
+              <span class="fchip" style="cursor:default;">AU</span>
+              <span class="fchip" style="cursor:default;">CA</span>
+              <span class="fchip" style="cursor:default;">IT</span>
+              <span class="fchip" style="cursor:default;">BR</span>
+            </div>
+          </div>
+
+          <!-- Format inventory table -->
+          <table class="campaign-table">
+            <thead>
+              <tr>
+                <th style="width:130px;">Format</th>
+                <th>Description</th>
+                <th>Sample Inventory</th>
+              </tr>
+            </thead>
+            <tbody id="lineTable"></tbody>
+          </table>
+
+          <p class="plan-footnote">*Custom packages available for World Cup, F1, NBA, Gaming, Holidays, and more.</p>
+
+        </div>
+
+        <!-- PANEL: SUMMARY -->
+        <div class="panel-content" id="panel-summary">
+          <div class="summary-stat-row">
+            <div class="summary-stat-card">
+              <div class="summary-stat-label">Total Budget</div>
+              <div class="summary-stat-value" id="panelBudget">$250,000</div>
+              <div class="summary-stat-sub">7 Markets</div>
+            </div>
+            <div class="summary-stat-card">
+              <div class="summary-stat-label">Total Impressions</div>
+              <div class="summary-stat-value" id="panelImps" style="color:var(--blue)">7.6M</div>
+              <div class="summary-stat-sub" id="panelViewability">90% avg viewability</div>
+            </div>
+            <div class="summary-stat-card">
+              <div class="summary-stat-label">Primary KPI</div>
+              <div class="summary-stat-value" style="font-size:20px; margin-top:4px;">Attention</div>
+              <div class="summary-stat-sub">Alkimi Attention Score</div>
+            </div>
+          </div>
+          <div class="breakdown-grid">
+            <div class="breakdown-card">
+              <div class="breakdown-card-label" style="color:#4B9EFF;">
+                <span class="tag tag-ctv">CTV</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-row-lbl">Budget</span>
+                <span class="breakdown-row-val" id="pCTVBud">—</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-row-lbl">Impressions</span>
+                <span class="breakdown-row-val" id="pCTVImps">—</span>
+              </div>
+            </div>
+            <div class="breakdown-card">
+              <div class="breakdown-card-label" style="color:#00C896;">
+                <span class="tag tag-tradfi">TradFi/Consumer</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-row-lbl">Budget</span>
+                <span class="breakdown-row-val" id="pTFBud">—</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-row-lbl">Impressions</span>
+                <span class="breakdown-row-val" id="pTFImps">—</span>
+              </div>
+            </div>
+            <div class="breakdown-card">
+              <div class="breakdown-card-label" style="color:#FBBF24;">
+                <span class="tag tag-studio">Alkimi Studio</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-row-lbl">Budget</span>
+                <span class="breakdown-row-val" id="pStudioBud">—</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-row-lbl">Impressions</span>
+                <span class="breakdown-row-val" id="pStudioImps">—</span>
+              </div>
+            </div>
+          </div>
+
+          <hr class="pdiv" style="margin: 20px 0;">
+
+          <!-- Added Value (merged) -->
+          <div class="av-layout">
+            <div style="display:flex; flex-direction:column; gap:14px;">
+              <div class="av-stat-card">
+                <div class="av-stat-label">Added Value Budget</div>
+                <div class="av-stat-value" style="color:var(--green)" id="avBudgetDisplay">—</div>
+                <div class="av-stat-sub" id="avSubLine">10% of plan value at avg CPM</div>
+              </div>
+              <div class="av-stat-card">
+                <div class="av-stat-label">Added Value Impressions</div>
+                <div class="av-stat-value" style="color:var(--purple-light)" id="avLine">—</div>
+              </div>
+              <div class="av-stat-card" style="font-size:12px;">
+                <div class="panel-row" style="margin-bottom:6px;"><span class="panel-row-lbl">AV Ratio</span><span class="panel-row-val" id="avRatioDisplay">10% of plan</span></div>
+                <p style="font-size:10.5px; color:var(--text-muted); line-height:1.55; margin-top:10px;">AV is attributed proportionally across all markets based on share of spend, at the weighted average CPM of the plan.</p>
+              </div>
+            </div>
+            <div class="av-box">
+              <div class="av-title">What's Included</div>
+              <div class="av-item"><span class="av-dot"></span>
+                <span><strong style="color:var(--text)">Added Value CTV Impressions</strong><br><span id="avCTVLine">Added Value CTV impressions included</span></span>
+              </div>
+              <div class="av-item" style="margin-top:10px;"><span class="av-dot"></span>
+                <span><strong style="color:var(--text)">Brand Uplift Study</strong><br>Pre/post brand awareness measurement across target markets</span>
+              </div>
+              <div class="av-item" style="margin-top:10px;"><span class="av-dot"></span>
+                <span><strong style="color:var(--text)">AI Visibility Study</strong><br>How Alkimi's AI models surface your brand in relevant queries</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL: FORMATS + SITE LIST -->
+        <div class="panel-content" id="panel-formats">
+          <div class="formats-grid">
+
+            <div class="format-card">
+              <div class="format-card-tag"><span class="tag tag-ctv">CTV</span></div>
+              <p class="format-card-desc">:15/:30 non-skippable video on premium connected TV partners, reaching audiences in lean-back, high-attention environments.</p>
+              <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border);">
+                <div class="sites-category-title" style="margin-bottom:8px;">Partners</div>
+                <div class="sites-chips">
+                  <span class="site-chip">Paramount+</span><span class="site-chip">Tubi</span><span class="site-chip">NBCUniversal</span><span class="site-chip">Fox</span><span class="site-chip">A+E</span><span class="site-chip">AMC Networks</span><span class="site-chip">Roku</span><span class="site-chip">SamsungTV</span><span class="site-chip">DirectTV</span><span class="site-chip">Comcast</span><span class="site-chip">Warner Bros Discovery</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="format-card">
+              <div class="format-card-tag"><span class="tag tag-tradfi">TradFi/Consumer Takeover</span></div>
+              <p class="format-card-desc">100% Share of Screen, takeover of all IAB standard ad units on a page. Zero competition, full page ownership at the moment of consumption.</p>
+              <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border);">
+                <div class="sites-category-title" style="margin-bottom:8px;">Finance & News</div>
+                <div class="sites-chips" style="margin-bottom:10px;">
+                  <span class="site-chip">WSJ</span><span class="site-chip">Bloomberg</span><span class="site-chip">Reuters</span><span class="site-chip">Financial Times</span><span class="site-chip">CNBC</span><span class="site-chip">Fortune</span><span class="site-chip">Forbes</span><span class="site-chip">MarketWatch</span><span class="site-chip">Yahoo Finance</span><span class="site-chip">Investing.com</span><span class="site-chip">Business Insider</span>
+                </div>
+                <div class="sites-category-title" style="margin-bottom:8px;">Sport</div>
+                <div class="sites-chips">
+                  <span class="site-chip">ESPN</span><span class="site-chip">Eurosport</span><span class="site-chip">Yahoo Sports</span><span class="site-chip">The Guardian</span><span class="site-chip">talkSPORT</span><span class="site-chip">Footballco</span><span class="site-chip">Sport Bible</span><span class="site-chip">Euronews</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="format-card">
+              <div class="format-card-tag"><span class="tag tag-studio">Alkimi Studio</span></div>
+              <p class="format-card-desc">Custom ad units engineered to drive attention and engagement, built in Alkimi Studio and measured against attention KPIs.</p>
+              <p style="font-size:11px; color:var(--purple-light); margin-top:10px; line-height:1.55;">Note: Alkimi Studio custom placements can run across any of the TradFi/Consumer sites.</p>
+              <a href="https://my.cavai.com/creatives/51799-52628-53596-82660/banner/f98fd31b552ae87281757c6e339cb0b2_"
+                 target="_blank"
+                 style="display:inline-flex; align-items:center; gap:5px; margin-top:12px; font-size:11.5px; color:var(--purple-light); text-decoration:none; font-weight:600;">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                  <path d="M9 3h4v4h-1.5V5.56L7.28 9.78l-1.06-1.06L10.44 4.5H9z" fill="currentColor"/>
+                  <path d="M3 3h4v1.5H4.5v7h7V10H13v4H3z" fill="currentColor" opacity="0.5"/>
+                </svg>
+                View creative example ↗
+              </a>
+            </div>
+
+          </div>
+          <p style="font-size:10px; color:var(--text-dim); font-style:italic; margin-top:18px;">
+            Full site list by market provided for approval prior to campaign launch, campaigns run across approved sites only.
+          </p>
+        </div>
+
+      </div><!-- /panel-area -->
+    </div><!-- /center -->
+  </div><!-- /content-area -->
+</main>
+
+<script>
+/* ── DATA ── */
+const LINES = [
+  {geo:'US', color:'#5C26FF', fmt:'ctv',    tag:'CTV',             t:'Premium CTV',              cpm:30,  view:0.95, r:0.25},
+  {geo:'US', color:'#5C26FF', fmt:'tradfi', tag:'TradFi/Consumer Takeover', t:'100% Share of Screen', cpm:25,  view:0.84, r:0.14},
+  {geo:'US', color:'#5C26FF', fmt:'studio', tag:'Alkimi Studio',   t:'Custom Attention Units',   cpm:22,  view:0.75, r:0.01},
+  {geo:'DE', color:'#00E87B', fmt:'ctv',    tag:'CTV',             t:'Premium CTV',              cpm:28,  view:0.95, r:0.08},
+  {geo:'DE', color:'#00E87B', fmt:'tradfi', tag:'TradFi/Consumer Takeover', t:'100% Share of Screen', cpm:23,  view:0.84, r:0.03},
+  {geo:'DE', color:'#00E87B', fmt:'studio', tag:'Alkimi Studio',   t:'Custom Attention Units',   cpm:20,  view:0.75, r:0.01},
+  {geo:'FR', color:'#8A5CFF', fmt:'ctv',    tag:'CTV',             t:'Premium CTV',              cpm:28,  view:0.95, r:0.06},
+  {geo:'FR', color:'#8A5CFF', fmt:'tradfi', tag:'TradFi/Consumer Takeover', t:'100% Share of Screen', cpm:23,  view:0.84, r:0.03},
+  {geo:'FR', color:'#8A5CFF', fmt:'studio', tag:'Alkimi Studio',   t:'Custom Attention Units',   cpm:20,  view:0.75, r:0.01},
+  {geo:'AU', color:'#38BDF8', fmt:'ctv',    tag:'CTV',             t:'Premium CTV',              cpm:28,  view:0.95, r:0.07},
+  {geo:'AU', color:'#38BDF8', fmt:'tradfi', tag:'TradFi/Consumer Takeover', t:'100% Share of Screen', cpm:23,  view:0.84, r:0.02},
+  {geo:'AU', color:'#38BDF8', fmt:'studio', tag:'Alkimi Studio',   t:'Custom Attention Units',   cpm:20,  view:0.75, r:0.01},
+  {geo:'CA', color:'#F87171', fmt:'ctv',    tag:'CTV',             t:'Premium CTV',              cpm:28,  view:0.95, r:0.07},
+  {geo:'CA', color:'#F87171', fmt:'tradfi', tag:'TradFi/Consumer Takeover', t:'100% Share of Screen', cpm:23,  view:0.84, r:0.02},
+  {geo:'CA', color:'#F87171', fmt:'studio', tag:'Alkimi Studio',   t:'Custom Attention Units',   cpm:20,  view:0.75, r:0.01},
+  {geo:'IT', color:'#34D399', fmt:'ctv',    tag:'CTV',             t:'Premium CTV',              cpm:25,  view:0.95, r:0.04},
+  {geo:'IT', color:'#34D399', fmt:'tradfi', tag:'TradFi/Consumer Takeover', t:'100% Share of Screen', cpm:20,  view:0.84, r:0.02},
+  {geo:'IT', color:'#34D399', fmt:'studio', tag:'Alkimi Studio',   t:'Custom Attention Units',   cpm:17,  view:0.75, r:0.01},
+  {geo:'BR', color:'#FBBF24', fmt:'ctv',    tag:'CTV',             t:'Premium CTV',              cpm:15,  view:0.95, r:0.05},
+  {geo:'BR', color:'#FBBF24', fmt:'tradfi', tag:'TradFi/Consumer Takeover', t:'100% Share of Screen', cpm:14,  view:0.84, r:0.05},
+  {geo:'BR', color:'#FBBF24', fmt:'studio', tag:'Alkimi Studio',   t:'Custom Attention Units',   cpm:11,  view:0.75, r:0.01},
+];
+const FLAGS = {US:'US', DE:'DE', FR:'FR', AU:'AU', CA:'CA', IT:'IT', BR:'BR'};
+const GEOS  = ['US','DE','FR','AU','CA','IT','BR'];
+
+function avRatio(b) {
+  const steps = [[100000,0.10],[250000,0.125],[500000,0.15],[750000,0.175],[1000000,0.20]];
+  if (b <= steps[0][0]) return steps[0][1];
+  if (b >= steps[steps.length-1][0]) return steps[steps.length-1][1];
+  for (let i = 0; i < steps.length - 1; i++) {
+    const [b0,r0] = steps[i], [b1,r1] = steps[i+1];
+    if (b >= b0 && b <= b1) return r0 + (b - b0) / (b1 - b0) * (r1 - r0);
+  }
+  return 0.10;
+}
+function fmtPct(r) {
+  const v = r * 100;
+  return (v % 1 === 0 ? v.toFixed(0) : v.toFixed(1)) + '%';
+}
+const MIN = 100000, MAX = 1000000;
+let budget = 250000;
+
+/* ── FILTER STATE ── */
+const GEO_COLORS = {US:'#5C26FF',DE:'#00E87B',FR:'#8A5CFF',AU:'#38BDF8',CA:'#F87171',IT:'#34D399',BR:'#FBBF24'};
+const FMT_COLORS = {ctv:'#4B9EFF', tradfi:'#00C896', video:'#63B3ED', studio:'#FBBF24'};
+
+/* ── FORMAT INFO (for the media plan table) ── */
+const FORMAT_INFO = {
+  ctv: {
+    label: 'CTV', tagClass: 'tag-ctv',
+    desc: 'Premium CTV (:15/:30) - Branding, Performance',
+    inventory: {
+      US: 'FOX, Paramount+, Tubi, ESPN, Discovery+, DAZN, SamsungTV, etc.',
+      DE: 'Joyn, ProSiebenSat.1, RTL+, DAZN, Sky DE, etc.',
+      FR: 'TF1, M6, Canal+, DAZN, BeIN Sports, etc.',
+      AU: 'Nine, Seven, 10 Play, BINGE, Kayo, DAZN, etc.',
+      CA: 'CBC, CTV, Global TV, Crave, DAZN, etc.',
+      IT: 'Mediaset, RAI, Sky Italia, DAZN, etc.',
+      BR: 'Globo, SBT, Record, DAZN, etc.',
+    }
+  },
+  tradfi: {
+    label: '100% Share of Screen', tagClass: 'tag-tradfi',
+    desc: 'TradFi/Consumer High Impact',
+    inventory: { default: 'Business Insider, Yahoo Finance, CNBC, Bloomberg, Footballco, etc.' }
+  },
+  studio: {
+    label: 'Alkimi Studio', tagClass: 'tag-studio',
+    desc: 'Alkimi Studio - Engagement',
+    inventory: { default: 'CoinMarketCap, AMBCrypto, Dextools, Cointelegraph, etc.' }
+  }
+};
+const ALL_FMTS = ['ctv','tradfi','studio'];
+let geoFilter = new Set();
+let fmtFilter = new Set();
+
+/* ── PANEL NAVIGATION ── */
+const PANEL_TITLES = {
+  lineitems:  'Media Plan',
+  summary:    'Summary',
+  details:    'Details',
+  formats:    'Formats & Inventory',
+  addedvalue: 'Added Value',
+};
+
+function showPanel(name, navEl) {
+  // Update nav active states
+  document.querySelectorAll('.nav-item[data-panel]').forEach(n => n.classList.remove('active'));
+  if (navEl) navEl.classList.add('active');
+
+  // Show/hide all panels
+  document.querySelectorAll('.panel-content').forEach(p => p.classList.remove('active'));
+
+  const header = document.getElementById('panelHeader');
+  const panelArea = document.getElementById('panelArea');
+
+  const stats = document.getElementById('overviewStats');
+  if (name === 'overview') {
+    header.style.display = 'none';
+    if (stats) stats.style.display = 'grid';
+    return;
+  }
+  if (stats) stats.style.display = 'none';
+
+  const target = document.getElementById('panel-' + name);
+  if (target) {
+    target.classList.add('active');
+    header.style.display = 'flex';
+    document.getElementById('panelTitle').textContent = PANEL_TITLES[name] || name;
+    // Scroll panel area to top
+    panelArea.scrollTop = 0;
+  }
+}
+
+function setGeo(g) {
+  if (g === 'all') {
+    geoFilter.clear();
+  } else {
+    if (geoFilter.has(g)) geoFilter.delete(g);
+    else geoFilter.add(g);
+    if (geoFilter.size === GEOS.length) geoFilter.clear();
+  }
+  updateGeoChips();
+  renderLineTable(budget);
+}
+
+function updateGeoChips() {
+  const allActive = geoFilter.size === 0;
+  document.querySelectorAll('.fchip[data-geo]').forEach(el => {
+    const g = el.dataset.geo;
+    if (g === 'all') {
+      el.classList.toggle('active', allActive);
+      el.style.background = allActive ? 'var(--card)' : '';
+      el.style.color      = allActive ? 'var(--text)'  : '';
+    } else {
+      const on = geoFilter.has(g);
+      el.classList.toggle('active', on);
+      el.style.background = on ? GEO_COLORS[g] : '';
+      el.style.color      = on ? '#fff'         : '';
+    }
+  });
+}
+
+function setFmt(f) {
+  if (f === 'all') {
+    fmtFilter.clear();
+  } else {
+    if (fmtFilter.has(f)) fmtFilter.delete(f);
+    else fmtFilter.add(f);
+    if (fmtFilter.size === ALL_FMTS.length) fmtFilter.clear();
+  }
+  updateFmtChips();
+  renderLineTable(budget);
+}
+
+function updateFmtChips() {
+  const allActive = fmtFilter.size === 0;
+  document.querySelectorAll('.fchip[data-fmt]').forEach(el => {
+    const f = el.dataset.fmt;
+    if (f === 'all') {
+      el.classList.toggle('active', allActive);
+      el.style.background = allActive ? 'var(--card)' : '';
+      el.style.color      = allActive ? 'var(--text)'  : '';
+    } else {
+      const on = fmtFilter.has(f);
+      el.classList.toggle('active', on);
+      el.style.background = on ? FMT_COLORS[f] : '';
+      el.style.color      = on ? '#fff'         : '';
+    }
+  });
+}
+
+function renderLineTable(b) {
+  const tbody = document.getElementById('lineTable');
+  tbody.innerHTML = '';
+  ALL_FMTS.forEach(fmt => {
+    const info = FORMAT_INFO[fmt];
+    const inv  = info.inventory.default || Object.values(info.inventory)[0] || '';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="tag ${info.tagClass}">${info.label}</span></td>
+      <td style="color:var(--text-muted);font-size:12px;">${info.desc}</td>
+      <td style="color:var(--text-dim);font-size:11.5px;">${inv}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ── HELPERS ── */
+function fmt$(n) {
+  if (n >= 1e6) return '$' + (n/1e6).toFixed(2) + 'M';
+  if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
+  return '$' + Math.round(n);
+}
+function fmtI(n) {
+  if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
+  if (n >= 1000) return Math.round(n/1000) + 'K';
+  return Math.round(n).toString();
+}
+
+function calc(b) {
+  let totalI=0, ctvB=0, tfB=0, studioB=0, ctvI=0, tfI=0, studioI=0;
+  let wCpmSum=0, wViewSum=0, wRSum=0;
+  const geo={};
+  LINES.forEach(l => {
+    const lb = b * l.r, li = lb / l.cpm * 1000;
+    totalI += li;
+    wCpmSum  += l.r * l.cpm;
+    wViewSum += l.r * l.view;
+    wRSum    += l.r;
+    if      (l.fmt==='ctv')    { ctvB+=lb;    ctvI+=li;    }
+    else if (l.fmt==='tradfi') { tfB+=lb;     tfI+=li;     }
+    else                       { studioB+=lb; studioI+=li; }
+    if (!geo[l.geo]) geo[l.geo] = {b:0, i:0, color:l.color};
+    geo[l.geo].b += lb; geo[l.geo].i += li;
+  });
+  const avgCpm  = wRSum > 0 ? wCpmSum  / wRSum : 25;
+  const avgView = wRSum > 0 ? wViewSum / wRSum : 0.90;
+  const avB = b * avRatio(b), avI = avB / avgCpm * 1000;
+  ctvI += avI; totalI += avI;
+  return {totalI, ctvB, tfB, studioB, ctvI, tfI, studioI, geo, avI, avB, avgCpm, avgView};
+}
+
+/* ── UI UPDATE ── */
+function updateUI(b) {
+  budget = b;
+  const s = calc(b);
+
+  document.getElementById('budgetDisplay').textContent = fmt$(b);
+  const avPct = fmtPct(avRatio(b));
+  const viewPct = Math.round(s.avgView * 100);
+  document.getElementById('impDisplay').textContent    = `~${fmtI(s.totalI)} impressions · ${viewPct}% avg viewability · +${avPct} added value`;
+  document.getElementById('avRatioDisplay').textContent = `${avPct} of plan`;
+  document.getElementById('panelBudget').textContent   = fmt$(b);
+  document.getElementById('panelImps').textContent     = fmtI(s.totalI);
+  document.getElementById('panelViewability').textContent = `${viewPct}% avg viewability`;
+  document.getElementById('pCTVBud').textContent       = fmt$(s.ctvB);
+  document.getElementById('pTFBud').textContent        = fmt$(s.tfB);
+  document.getElementById('pStudioBud').textContent    = fmt$(s.studioB);
+  document.getElementById('pCTVImps').textContent      = fmtI(s.ctvI);
+  document.getElementById('pTFImps').textContent       = fmtI(s.tfI);
+  document.getElementById('pStudioImps').textContent   = fmtI(s.studioI);
+  const avgCpmRounded = Math.round(s.avgCpm);
+  document.getElementById('avBudgetDisplay').textContent = fmt$(s.avB);
+  document.getElementById('avLine').textContent        = `+${fmtI(s.avI)} added value CTV impressions`;
+  document.getElementById('avCTVLine').textContent     = `+${fmtI(s.avI)} added value CTV impressions`;
+  document.getElementById('avSubLine').textContent     = `${avPct} of plan value at $${avgCpmRounded} avg CPM`;
+
+  // Details tab — per-geo rows
+  const detailRows = document.getElementById('detailGeoRows');
+  if (detailRows) {
+    detailRows.innerHTML = '';
+    GEOS.forEach(g => {
+      const gs = s.geo[g];
+      const row = document.createElement('div');
+      row.className = 'panel-row';
+      row.innerHTML = `
+        <span class="panel-row-lbl" style="display:flex;align-items:center;gap:5px;">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${gs.color}"></span>
+          ${FLAGS[g]} ${g}
+        </span>
+        <span class="panel-row-val">${fmt$(gs.b)} · ${fmtI(gs.i)}</span>`;
+      detailRows.appendChild(row);
+    });
+  }
+
+  // Geo grid
+  const grid = document.getElementById('geoGrid');
+  grid.innerHTML = '';
+  GEOS.forEach(g => {
+    const gs = s.geo[g];
+    const card = document.createElement('div');
+    card.className = 'geo-card';
+    card.style.borderTopColor = gs.color;
+    card.innerHTML = `
+      <span class="geo-flag">${FLAGS[g]}</span>
+      <div class="geo-name">${g}</div>
+      <div class="geo-budget">${fmt$(gs.b)}</div>
+      <div class="geo-imps" style="color:${gs.color}">${fmtI(gs.i)}</div>`;
+    grid.appendChild(card);
+  });
+
+  renderLineTable(b);
+}
+
+/* ── TIER BUTTONS ── */
+function setBudget(v) {
+  document.getElementById('budgetSlider').value = v;
+  document.querySelectorAll('.tier-btn').forEach(b => {
+    b.classList.toggle('active', +b.dataset.v === v);
+  });
+  updateUI(v);
+}
+function onSlider(v) {
+  document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('active'));
+  updateUI(v);
+}
+
+/* ── INIT ── */
+setBudget(250000);
+// Default to Media Plan panel on load
+const defaultNavEl = document.querySelector('.nav-item[data-panel="lineitems"]');
+showPanel('lineitems', defaultNavEl);
+</script>
+</body>
+</html>
